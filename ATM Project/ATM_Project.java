@@ -36,7 +36,7 @@ public class ATM_Project {
                     int money_first = scanner.nextInt();
                     account_balance -= money_first;
                     if (account_balance <= 0){
-                        System.out.println("You cant withdraw money because you dont have enough money.");
+                        System.out.println("You can't withdraw money because you don't have enough balance at your account.");
                     }
                     else if (account_balance > 0){
                         System.out.println("New bank balance: " + account_balance);
