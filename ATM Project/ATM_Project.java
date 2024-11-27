@@ -15,44 +15,48 @@ public class ATM_Project {
 
 
 
-        int account_balance = 1000;
+int account_balance = 1000;
 
 
         while (true){
-            System.out.print("Please enter one option: ");
-
-            int ops = scanner.nextInt();
-            if (ops == -1){
-                System.out.println("Please don't forget taken your 1debit card...");
+            System.out.println(" *************************** \n " +
+                    "    ops 1 = Find out the bank account balance\n" +
+                    "     ops 2 = Withdraw money\n" +
+                    "     ops 3 = To deposit money\n" +
+                    "     ops 4 = Press -1 for exit\n " +
+                    " *************************** ");
+            System.out.print("Please choose your ops: ");
+            int opt = scanner.nextInt();
+            if (opt == -1){
+                System.out.println("Exit!!");
                 break;
             }
-
-            switch (ops){
+            switch (opt){
                 case 1:
                     System.out.println("Bank account balance: " + account_balance);
                     break;
                 case 2:
                     System.out.print("How much do you withdraw: ");
-                    int money_first = scanner.nextInt();
-                    account_balance -= money_first;
-                    if (account_balance <= 0){
+                    int withdraw = scanner.nextInt();
+                    if (account_balance < withdraw){
                         System.out.println("You can't withdraw money because you don't have enough balance at your account.");
+                        break;
                     }
-                    else if (account_balance > 0){
-                        System.out.println("New bank balance: " + account_balance);
+                    else if (account_balance >= withdraw){
+                        account_balance -= withdraw;
+                        System.out.println("New bank balance is : " + account_balance);
                     }
                     break;
                 case 3:
-                    System.out.print("How much money do you deposit: ");
-                    int money_second = scanner.nextInt();
-                    account_balance += money_second;
-                    System.out.println("You're new bank account balance: " + account_balance);
+                    System.out.print("How much do you deposit: ");
+                    int deposit = scanner.nextInt();
+                    account_balance += deposit;
+                    System.out.println("New bank balance is : " + account_balance);
                     break;
                 default:
-                    System.out.println("You cant do this operation");
+                    System.out.println("Wrong opt");
                     break;
             }
-
         }
     }
 }
