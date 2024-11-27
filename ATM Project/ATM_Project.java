@@ -42,7 +42,7 @@ int account_balance = 1000;
                         System.out.println("You can't withdraw money because you don't have enough balance at your account.");
                         break;
                     }
-                    if else (account_balance >= withdraw){
+                    else if (account_balance >= withdraw){
                         account_balance -= withdraw;
                         System.out.println("New bank balance is : " + account_balance);
                     }
