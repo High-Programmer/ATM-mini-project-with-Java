@@ -1,62 +1,68 @@
 import java.util.Scanner;
 
-public class ATM_Project {
+public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-        /*
-        We coding a ATM program with use to while loop.
+        
+                /*
+        We code an ATM program with use to while loop.
 
         ops 1 = Find out the bank account balance
         ops 2 = Withdraw money
         ops 3 = To deposit money
-        ops 4 = Press -1 for exit
+        ops 4 = Press 4 for exit
          */
 
+        System.out.println("Transactions\n" +
+                "1 - Balance learning\n" +
+                "2 - Withdrawal\n" +
+                "3 - Deposit\n" +
+                "4 - Exit");
 
-
-int account_balance = 1000;
-
+        int loopWrongEnterController = 2;
 
         while (true){
-            System.out.println(" *************************** \n " +
-                    "    ops 1 = Find out the bank account balance\n" +
-                    "     ops 2 = Withdraw money\n" +
-                    "     ops 3 = To deposit money\n" +
-                    "     ops 4 = Press -1 for exit\n " +
-                    " *************************** ");
-            System.out.print("Please choose your ops: ");
-            int opt = scanner.nextInt();
-            if (opt == -1){
-                System.out.println("Exit!!");
+            System.out.print("Please enter what you want to do: ");
+            int userInput = scanner.nextInt();
+            float accountBalance = 1000;
+            float tempBalance;
+
+            if (userInput > 4 && userInput < 9 && loopWrongEnterController > 0){
+                System.out.println("Wrong input, Please try again..");
+                loopWrongEnterController--;
+                continue;
+            }
+            else if (userInput == 4){
+                System.out.println("Exiting...");
                 break;
             }
-            switch (opt){
+            else if (loopWrongEnterController == 0){
+                System.out.println("You enter too many wrong input \nExiting...");
+                break;
+            }
+
+            switch (userInput){
                 case 1:
-                    System.out.println("Bank account balance: " + account_balance);
+                    System.out.println("Your account Balance is " + accountBalance + "$");
                     break;
                 case 2:
-                    System.out.print("How much do you withdraw: ");
-                    int withdraw = scanner.nextInt();
-                    if (account_balance < withdraw){
-                        System.out.println("You can't withdraw money because you don't have enough balance at your account.");
-                        break;
+                    System.out.print("How much money do you want to withdraw: ");
+                    tempBalance = scanner.nextFloat();
+                    if (tempBalance < accountBalance){
+                        accountBalance -= tempBalance;
+                        System.out.println("Your new account balance is " + accountBalance + "$");
                     }
-                    else if (account_balance >= withdraw){
-                        account_balance -= withdraw;
-                        System.out.println("New bank balance is : " + account_balance);
+                    else{
+                        System.out.println("You don't have enough money to withdraw");
                     }
                     break;
                 case 3:
-                    System.out.print("How much do you deposit: ");
-                    int deposit = scanner.nextInt();
-                    account_balance += deposit;
-                    System.out.println("New bank balance is : " + account_balance);
-                    break;
-                default:
-                    System.out.println("Wrong opt");
-                    break;
+                    System.out.print("How much money do you want to deposit: ");
+                    tempBalance = scanner.nextFloat();
+                    accountBalance += tempBalance;
+                    System.out.println("Your new account balance is " + accountBalance + "$");
             }
+
         }
     }
 }
