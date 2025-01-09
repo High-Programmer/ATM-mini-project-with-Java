@@ -21,7 +21,7 @@ public class Main {
         int loopWrongEnterController = 2;
 
         while(true){
-
+// WE CODE OUR ATM PART INSIDE THE IF BLOCK BECAUSE WE WANT TO IF IT IS BE SUCCESSFUL IT CAN USE OUR ATM PROGRAM
             if(userName.equals(userNameData) && password.equals(passwordData)) {
                 System.out.println("Transactions\n" +
                         "1 - Balance learning\n" +
