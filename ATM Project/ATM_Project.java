@@ -2,67 +2,81 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        /*In this program we'll code 2 steps first one is log in page
+        after that if this person successfully enter than we'll enter the banking page*/
+
         Scanner scanner = new Scanner(System.in);
-        
-                /*
-        We code an ATM program with use to while loop.
 
-        ops 1 = Find out the bank account balance
-        ops 2 = Withdraw money
-        ops 3 = To deposit money
-        ops 4 = Press 4 for exit
-         */
+        String userNameData = "admin";
+        String passwordData = "123456";
 
-        System.out.println("Transactions\n" +
-                "1 - Balance learning\n" +
-                "2 - Withdrawal\n" +
-                "3 - Deposit\n" +
-                "4 - Exit");
+        System.out.print("Enter your username:");
+        String userName = scanner.nextLine();
+        System.out.print("Enter your password:");
+        String password = scanner.nextLine();
 
+        int balance = 1000;
+
+        int loginWrongEnterController = 2;
         int loopWrongEnterController = 2;
 
-        while (true){
-            System.out.print("Please enter what you want to do: ");
-            int userInput = scanner.nextInt();
-            float accountBalance = 1000;
-            float tempBalance;
+        while(true){
 
-            if (userInput > 4 && userInput < 9 && loopWrongEnterController > 0){
-                System.out.println("Wrong input, Please try again..");
+            if(userName.equals(userNameData) && password.equals(passwordData)) {
+                System.out.println("Transactions\n" +
+                        "1 - Balance learning\n" +
+                        "2 - Withdrawal\n" +
+                        "3 - Deposit\n" +
+                        "4 - Exit");
+                System.out.print("Please enter what you want to do: ");
+                int operation = scanner.nextInt();
+
+
+                if(operation > 4 && loopWrongEnterController != 0){
+                    System.out.print("You enter wrong operation. \nPlease try again.");
+                    loopWrongEnterController--;
+                    continue;
+                }
+                else if(loopWrongEnterController == 0){
+                    System.out.println("You enter too many wrong operations. \nPlease try again later");
+                    break;
+                }
+                else if(operation == 4){
+                    System.out.println("Thank you for choosing us");
+                    break;
+                }
+                else{
+                    switch (operation){
+                        case 1:
+                            System.out.println("Your account balance is " + balance );
+                            break;
+                        case 2:
+                            System.out.print("How much money do you want to withdraw: ");
+                            int withdrawal = scanner.nextInt();
+                            balance -= withdrawal;
+                            System.out.println("Your account balance is " + balance );
+                            break;
+                        case 3:
+                            System.out.print("How much money do you want to deposit: ");
+                            int deposit = scanner.nextInt();
+                            balance += deposit;
+                            System.out.println("Your account balance is " + balance );
+                            break;
+                    }
+                }
+            }
+            else if (!(userName.equals(userNameData)) && loginWrongEnterController != 0){
+                System.out.println("Wrong username or password!");
+                loginWrongEnterController--;
+            }
+            else if (!(password.equals(passwordData)) && loginWrongEnterController != 0){
+                System.out.println("Wrong username or password!");
                 loopWrongEnterController--;
-                continue;
             }
-            else if (userInput == 4){
-                System.out.println("Exiting...");
+            else if(loginWrongEnterController == 0){
+                System.out.println("You have entered wrong credentials");
                 break;
             }
-            else if (loopWrongEnterController == 0){
-                System.out.println("You enter too many wrong input \nExiting...");
-                break;
-            }
-
-            switch (userInput){
-                case 1:
-                    System.out.println("Your account Balance is " + accountBalance + "$");
-                    break;
-                case 2:
-                    System.out.print("How much money do you want to withdraw: ");
-                    tempBalance = scanner.nextFloat();
-                    if (tempBalance < accountBalance){
-                        accountBalance -= tempBalance;
-                        System.out.println("Your new account balance is " + accountBalance + "$");
-                    }
-                    else{
-                        System.out.println("You don't have enough money to withdraw");
-                    }
-                    break;
-                case 3:
-                    System.out.print("How much money do you want to deposit: ");
-                    tempBalance = scanner.nextFloat();
-                    accountBalance += tempBalance;
-                    System.out.println("Your new account balance is " + accountBalance + "$");
-            }
-
         }
     }
 }
